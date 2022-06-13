@@ -30,17 +30,17 @@ if'__main__'==__name__:
 	bandwidth1={'bw':1}
 	bandwidth2={'bw':0.5}
 
-	net.addLink(ha,r1,cls=TCLink, intfName1='ha-eth0', intfName2='r1-eth0',**bandwidth1) #ha-eth0 r1-eth0 
-	net.addLink(ha,r2,cls=TCLink, intfName1='ha-eth1', intfName2='r2-eth0',**bandwidth1) #ha-eth1 r2-eth0
+	net.addLink(ha,r1,cls=TCLink, intfName1='ha-eth0', intfName2='r1-eth0',**bandwidth1)
+	net.addLink(ha,r2,cls=TCLink, intfName1='ha-eth1', intfName2='r2-eth0',**bandwidth1)
 
-	net.addLink(hb,r3,cls=TCLink, intfName1='hb-eth0', intfName2='r3-eth0',**bandwidth1) #hb-eth0 r3-eth0
-	net.addLink(hb,r4,cls=TCLink, intfName1='hb-eth1', intfName2='r4-eth0',**bandwidth1) #hb-eth1 r4-eth0
+	net.addLink(hb,r3,cls=TCLink, intfName1='hb-eth0', intfName2='r3-eth0',**bandwidth1)
+	net.addLink(hb,r4,cls=TCLink, intfName1='hb-eth1', intfName2='r4-eth0',**bandwidth1)
 
-	net.addLink(r1,r3,cls=TCLink, intfName1='r1-eth1', intfName2='r3-eth1',**bandwidth2) #r1-eth1 r3-eth1
-	net.addLink(r1,r4,cls=TCLink, intfName1='r1-eth2', intfName2='r4-eth1',**bandwidth1) #r1-eth2 r4-eth1
+	net.addLink(r1,r3,cls=TCLink, intfName1='r1-eth1', intfName2='r3-eth1',**bandwidth2)
+	net.addLink(r1,r4,cls=TCLink, intfName1='r1-eth2', intfName2='r4-eth1',**bandwidth1)
 
-	net.addLink(r2,r3,cls=TCLink, intfName1='r2-eth1', intfName2='r3-eth2',**bandwidth1) #r2-eth1 r3-eth2
-	net.addLink(r2,r4,cls=TCLink, intfName1='r2-eth2', intfName2='r4-eth2',**bandwidth2) #r2-eth2 r4-eth2
+	net.addLink(r2,r3,cls=TCLink, intfName1='r2-eth1', intfName2='r3-eth2',**bandwidth1)
+	net.addLink(r2,r4,cls=TCLink, intfName1='r2-eth2', intfName2='r4-eth2',**bandwidth2)
 
 	net.build()
 
@@ -142,12 +142,12 @@ if'__main__'==__name__:
 	
 	r1.cmdPrint("tc qdisc del dev r1-eth0 root")
 	r1.cmdPrint("tc qdisc add dev r1-eth0 root netem delay 100ms")
-	'''
 	
 	time.sleep(2)
 	hb.cmd("iperf -s &")
 	time.sleep(2)
 	ha.cmd("iperf -c 192.168.3.1 -t 10 &") 
+	'''
 	
 	CLI(net)
 	
